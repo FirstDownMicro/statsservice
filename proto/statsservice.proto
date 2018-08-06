@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package go.micro.srv.statsservice; 
+
+service StatsService {
+    rpc GetPlayerBaseStats(GetPlayerStatsRequest) returns (BaseStatsResponse) {}    
+}
+
+message GetPlayerStatsRequest {
+    string player_id = 1;
+    int32 season_id = 2;
+}
+
+message BaseStatsResponse {
+    BaseStats stats = 1;
+}
+
+// Note I will do a pull from the api if no entry in the db exists, and then insert it in my db so that I can modify the data
+// How to handle the fact that different positions have different stats?
+// Note player id and season id can probably be a composite key in this case
+message BaseStats {
+    string id = 1;
+    string player_id = 2;
+    int32 season = 3;
+    int32 games_played = 4;
+    int32 games_started = 5;
+}
+
+message PassingStates {
+
+}
+
+message RushingStats {
+
+}
+
+message RecievingStats {
+
+}
+
+message DefensiveStats {
+
+}
+
